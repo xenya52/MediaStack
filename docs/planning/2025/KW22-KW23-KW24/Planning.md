@@ -94,6 +94,10 @@ Total timespan: 2025-05-29 -> 2023-06-12 (two Weeks)
     - Add steps for the upcoming week
     - Remove the Planning from the root README.md
 3. 07.06 - Implement test cases to preview Medias (Videos, PDFs and Images) (1h)
+    - Delete files that I accidentally added to the git repository
+    - Add tests for pdfPreview, imagePreview and videoPreview
+    - Create a MediaPreviewView a VideoJsPlayer and a PdfViewer for the upcoming logic that I'll implement
+    - 
 4. 08.06 - Implement Media preview (PDFs, Videos and Images), Add a "Header" into the UI (1h 30min)
 5. 09.06 - Add tests to edit file Names, Add possibility to Edit File Names (1h)
 6. 10.06 - Adjust documentation (+Developer doc), Make a universal artifact (1h)
