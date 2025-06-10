@@ -2,8 +2,10 @@ package com.MediaStack.MediaStack.ui;
 
 import com.MediaStack.MediaStack.entity.model.director.Director;
 import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileModel;
+import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileTypeEnum;
 import com.MediaStack.MediaStack.service.MediaFileService;
 import com.MediaStack.MediaStack.service.MediaFileStorageService;
+import com.MediaStack.MediaStack.ui.MediaPreviewButton;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -164,11 +166,33 @@ public class MainView extends VerticalLayout {
             });
             return delete;
         }).setHeader("Actions");
+
+        grid.addComponentColumn(mediaFile -> {
+            MediaPreviewButton previewButton = new MediaPreviewButton(
+                    mediaFile.getFileType(),
+                    mediaFile.getPath()
+            );
+            return previewButton.getPreviewButton();
+        }).setHeader("Preview");
+
         add(grid);
     }
 
     private void refreshGrid() {
         Collection<MediaFileModel> files = mediaService.getAllMediaFiles();
         grid.setItems(files);
+    }
+
+    private MediaFileTypeEnum getFileType(String mimeType) {
+        switch (mimeType) {
+            case "image/jpg":
+                return MediaFileTypeEnum.IMAGE_JPG;
+            case "video/mp4":
+                return MediaFileTypeEnum.VIDEO_MP4;
+            case "application/pdf":
+                return MediaFileTypeEnum.PDF;
+            default:
+                throw new IllegalArgumentException("Unsupported file type: " + mimeType);
+        }
     }
 }

@@ -44,12 +44,6 @@ dependencies {
 	// For the acutal database connection
 	implementation("org.xerial:sqlite-jdbc:3.49.1.0")
 	implementation("org.hibernate.orm:hibernate-community-dialects:7.0.0.Final")
-
-	// For Video and PDF preview in the UI
-	// https://vaadin.com/directory/component/pdf-viewer
-	// https://vaadin.com/directory/component/video-js-player
-	implementation("com.github.appreciated:video-js-player:2.0.0")
-	implementation("org.vaadin.alejandro:pdf-viewer:1.0.5")
 }
 
 dependencyManagement {

@@ -4,19 +4,27 @@ package com.MediaStack.MediaStack.ui;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.MediaStack.MediaStack.service.MediaFileService;
-import com.MediaStack.MediaStack.ui.MainView;
+import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileTypeEnum;
 
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.junit.jupiter.api.BeforeEach;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 
 @SpringBootTest
 class MainViewTest {
 
-    @org.mockito.Mock
+    @Mock
     private MediaFileService mediaFileService;
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
-        org.mockito.MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
@@ -28,41 +36,41 @@ class MainViewTest {
     @Test
     void testGetFileTypeImage() {
         MainView mainView = new MainView(mediaFileService);
-        String type = org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
-            java.lang.reflect.Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
+        MediaFileTypeEnum type = Assertions.assertDoesNotThrow(() -> {
+            Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
             method.setAccessible(true);
-            return (String) method.invoke(mainView, "image/png");
+            return (MediaFileTypeEnum) method.invoke(mainView, "image/jpg");
         });
-        org.junit.jupiter.api.Assertions.assertEquals("IMAGE", type);
+        Assertions.assertEquals(MediaFileTypeEnum.IMAGE_JPG, type);
     }
 
     @Test
     void testGetFileTypeVideo() {
         MainView mainView = new MainView(mediaFileService);
-        String type = org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
-            java.lang.reflect.Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
+        MediaFileTypeEnum type = Assertions.assertDoesNotThrow(() -> {
+            Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
             method.setAccessible(true);
-            return (String) method.invoke(mainView, "video/mp4");
+            return (MediaFileTypeEnum) method.invoke(mainView, "video/mp4");
         });
-        org.junit.jupiter.api.Assertions.assertEquals("VIDEO", type);
+        Assertions.assertEquals(MediaFileTypeEnum.VIDEO_MP4, type);
     }
 
     @Test
     void testGetFileTypePdf() {
         MainView mainView = new MainView(mediaFileService);
-        String type = org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
-            java.lang.reflect.Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
+        MediaFileTypeEnum type = Assertions.assertDoesNotThrow(() -> {
+            Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
             method.setAccessible(true);
-            return (String) method.invoke(mainView, "application/pdf");
+            return (MediaFileTypeEnum) method.invoke(mainView, "application/pdf");
         });
-        org.junit.jupiter.api.Assertions.assertEquals("PDF", type);
+        Assertions.assertEquals(MediaFileTypeEnum.PDF, type);
     }
 
     @Test
     void testGetFileTypeUnsupported() {
         MainView mainView = new MainView(mediaFileService);
-        org.junit.jupiter.api.Assertions.assertThrows(java.lang.reflect.InvocationTargetException.class, () -> {
-            java.lang.reflect.Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
+        Assertions.assertThrows(InvocationTargetException.class, () -> {
+            Method method = MainView.class.getDeclaredMethod("getFileType", String.class);
             method.setAccessible(true);
             method.invoke(mainView, "text/plain");
         });

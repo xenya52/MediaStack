@@ -99,6 +99,12 @@ Total timespan: 2025-05-29 -> 2023-06-12 (two Weeks)
     - Create a MediaPreviewView a VideoJsPlayer and a PdfViewer for the upcoming logic that I'll implement
     - 
 4. 08.06 - Implement Media preview (PDFs, Videos and Images), Add a "Header" into the UI (1h 30min)
+    - renamed test methods in MediaPreviewViewTests to follow naming conventions
+    - implement VideoJsPlayer without a extra dependency, just use the Html Container from Vaadin
+    - Adjust naming in the testVideoJsPlayer to follow naming conventions, change name of VideoJsPlayer to VideoPlayer
+    - remove the VideoJsPlayer libary
+    - impelemt PdfViewer without a extra dependency, just use the Html Container from Vaadin (guess I need to adjust that later / clearly far away from best practices)
+    - 
 5. 09.06 - Add tests to edit file Names, Add possibility to Edit File Names (1h)
 6. 10.06 - Adjust documentation (+Developer doc), Make a universal artifact (1h)
 7. 11.06 - Try to find bugs, Retrospective, Adjust planning
