@@ -1,4 +1,4 @@
-package com.MediaStack.MediaStack.entity.model.mediaFile;
+package com.MediaStack.MediaStack.model.mediaFile;
 
 public enum MediaFileTypeEnum {
     VIDEO_MP4,

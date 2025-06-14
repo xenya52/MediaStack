@@ -1,34 +1,27 @@
-package com.MediaStack.MediaStack.entity.model.mediaFile;
+package com.MediaStack.MediaStack.model.mediaFile;
 
 import java.time.LocalDateTime;
 
 import java.lang.Long;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 
-import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileTypeEnum;
+import com.MediaStack.MediaStack.model.mediaFile.MediaFileTypeEnum;
 
 /*
   Represents a media file with its properties.
   This class is used to encapsulate the details of a media file such as its ID, name, type, upload date, and path.
  */
 @Entity
-@Setter
+@Table(name = "media_file_model")
 @Getter
 @ToString
 @AllArgsConstructor
@@ -36,23 +29,20 @@ import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileTypeEnum;
 public class MediaFileModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "INTEGER")
     private Long id;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "fileType", nullable = false, columnDefinition = "TEXT")
     private MediaFileTypeEnum fileType;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(name = "upload", nullable = false, columnDefinition = "TEXT")
     private LocalDateTime uploadDate;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(name = "saved path", nullable = false, columnDefinition = "TEXT")
     private String path;
 }

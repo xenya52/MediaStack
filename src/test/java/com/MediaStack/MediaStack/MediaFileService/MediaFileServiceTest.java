@@ -1,8 +1,8 @@
 package com.MediaStack.MediaStack.MediaFileService;
 
-import com.MediaStack.MediaStack.entity.model.director.Director;
+import com.MediaStack.MediaStack.model.director.Director;
 import com.MediaStack.MediaStack.service.MediaFileService;
-import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileModel;
+import com.MediaStack.MediaStack.model.mediaFile.MediaFileModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

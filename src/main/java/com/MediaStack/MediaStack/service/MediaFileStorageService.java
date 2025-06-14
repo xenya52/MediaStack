@@ -1,6 +1,6 @@
 package com.MediaStack.MediaStack.service;
 
-import com.MediaStack.MediaStack.entity.model.mediaFile.MediaFileModel;
+import com.MediaStack.MediaStack.model.mediaFile.MediaFileModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
