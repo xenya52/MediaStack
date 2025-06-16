@@ -8,13 +8,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.NotBlank;
-
-import com.MediaStack.MediaStack.model.mediaFile.MediaFileTypeEnum;
 
 /*
   Represents a media file with its properties.
@@ -33,12 +27,12 @@ public class MediaFileModel {
     @Column(name = "id", columnDefinition = "INTEGER")
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "fileName", nullable = false, columnDefinition = "TEXT")
     private String name;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "fileType", nullable = false, columnDefinition = "TEXT")
-    private MediaFileTypeEnum fileType;
+    private MediaFileTypeEnum type;
 
     @Column(name = "upload", nullable = false, columnDefinition = "TEXT")
     private LocalDateTime uploadDate;

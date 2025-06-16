@@ -5,7 +5,8 @@ import com.MediaStack.MediaStack.model.mediaFile.MediaFileModel;
 import com.MediaStack.MediaStack.model.mediaFile.MediaFileTypeEnum;
 import com.MediaStack.MediaStack.service.MediaFileService;
 import com.MediaStack.MediaStack.service.MediaFileStorageService;
-import com.MediaStack.MediaStack.ui.MediaPreviewButton;
+import com.MediaStack.MediaStack.ui.components.ExportPathComponent;
+import com.MediaStack.MediaStack.ui.components.MediaUploadComponent;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -68,97 +69,6 @@ public class MainView extends VerticalLayout {
     }
 
     private void setupExportAndUploadRow() {
-        String defaultExportPath = System.getProperty("user.home") + "/Downloads/media-stack-export.db";
-        final String[] exportPath = { defaultExportPath };
-
-        // Upload
-        MemoryBuffer buffer = new MemoryBuffer();
-        Director mediaDirector = new Director();
-        Upload upload = new Upload(buffer);
-        upload.setAcceptedFileTypes("image/*", "video/*", "application/pdf");
-        upload.addSucceededListener(event -> {
-            logger.info("Upload succeeded: " + event.getFileName() + ", MIME type: " + event.getMIMEType());
-            try {
-                Path uploadDir = Paths.get("uploads");
-                if (!Files.exists(uploadDir)) {
-                    Files.createDirectories(uploadDir);
-                    logger.info("Created upload directory: " + uploadDir.toAbsolutePath());
-                }
-                Path filePath = uploadDir.resolve(event.getFileName());
-                logger.info("Saving uploaded file to: " + filePath.toAbsolutePath());
-                Files.copy(buffer.getInputStream(), filePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-
-                MediaFileModel mediaFile;
-                String mimeType = event.getMIMEType();
-                logger.info("Determining file type for MIME: " + mimeType);
-                if (mimeType.startsWith("image/")) {
-                    mediaFile = mediaDirector.constructImageFileModel(event.getFileName(), filePath.toString());
-                } else if (mimeType.startsWith("video/")) {
-                    mediaFile = mediaDirector.constructVideoFileModel(event.getFileName(), filePath.toString());
-                } else if (mimeType.equals("application/pdf")) {
-                    mediaFile = mediaDirector.constructPdfFileModel(event.getFileName(), filePath.toString());
-                } else {
-                    logger.warning("Unsupported file type: " + mimeType);
-                    throw new IllegalArgumentException("Unsupported file type: " + mimeType);
-                }
-                logger.info("Constructed MediaFileModel: name=" + mediaFile.getName() + ", path=" + mediaFile.getPath() + ", type=" + mediaFile.getFileType());
-                mediaService.createMediaFile(mediaFile);
-                logger.info("MediaFileModel persisted to database: " + mediaFile.getName());
-                Notification.show("File uploaded!");
-                refreshGrid();
-            } catch (IOException | IllegalArgumentException e) {
-                logger.severe("Upload failed: " + e.getMessage());
-                Notification.show("Upload failed: " + e.getMessage());
-            }
-        });
-
-        // Export Button
-        Button exportButton = new Button("Export Database", event -> {
-            boolean success = mediaFileStorageService.exportAllMediaFilesToFolder(exportPath[0]);
-            if (success) {
-                Notification.show("Database exported to: " + exportPath[0]);
-            } else {
-                Notification.show("Export failed");
-            }
-        });
-        exportButton.setWidth("180px");
-
-        // Change Path Button and TextField
-        Button changePathButton = new Button("Change Path ");
-        changePathButton.setWidth("180px");
-
-        TextField pathField = new TextField();
-        pathField.setWidth("400px");
-        pathField.setValue(exportPath[0]);
-        pathField.setVisible(false);
-
-        changePathButton.addClickListener(e -> {
-            pathField.setValue(exportPath[0]);
-            changePathButton.setVisible(false);
-            pathField.setVisible(true);
-            pathField.focus();
-        });
-
-        pathField.addBlurListener(e -> {
-            exportPath[0] = pathField.getValue();
-            changePathButton.setText("Change Path");
-            pathField.setVisible(false);
-            changePathButton.setVisible(true);
-        });
-        pathField.addKeyPressListener(key -> {
-            if ("Enter".equals(key.getKey())) {
-                exportPath[0] = pathField.getValue();
-                changePathButton.setText("Change Path");
-                pathField.setVisible(false);
-                changePathButton.setVisible(true);
-            }
-        });
-
-        // vertical layout for the buttons
-        VerticalLayout buttonColumn = new VerticalLayout(changePathButton, pathField, exportButton);
-        buttonColumn.setPadding(false);
-        buttonColumn.setSpacing(true);
-        buttonColumn.setAlignItems(FlexComponent.Alignment.STRETCH);
 
         // horizontal layout and center its content
         HorizontalLayout row = new HorizontalLayout(upload, buttonColumn);
@@ -179,7 +89,7 @@ public class MainView extends VerticalLayout {
 
         grid.addComponentColumn(mediaFile -> {
             MediaPreviewButton previewButton = new MediaPreviewButton(
-                    mediaFile.getFileType(),
+                    mediaFile.getType(),
                     mediaFile.getPath()
             );
             return previewButton.getPreviewButton();
@@ -194,7 +104,7 @@ public class MainView extends VerticalLayout {
         logger.info("Files fetched from mediaService: " + (files != null ? files.size() : "null"));
         if (files != null) {
             for (MediaFileModel file : files) {
-                logger.info("File: id=" + file.getId() + ", name=" + file.getName() + ", type=" + file.getFileType());
+                logger.info("File: id=" + file.getId() + ", name=" + file.getName() + ", type=" + file.getType());
             }
         } else {
             logger.warning("mediaService.getAllMediaFiles() returned null");

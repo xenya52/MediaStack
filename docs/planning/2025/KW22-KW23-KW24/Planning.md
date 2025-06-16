@@ -114,6 +114,10 @@ Total timespan: 2025-05-29 -> 2023-06-12 (two Weeks)
    - Add column names to the MediaFileModel for the preview functionality
    - Remove Spring validation annotations from the MediaFileModel because they are not needed for the preview functionality
    - Remove the Setter lombok annotations from the MediaFileModel because they are not needed
+   4.3 backup, refactor / wanna backup my state of MediaFileModelBuilder, ui
+   - Rename attributes of the MediaFileModelBuilder to match the MediaFileModel attributes
+   - Beginn with Modularize the compnents in the UI
+   - TODO: Get this ExportPath component done
 5. 09.06 - Add tests to edit file Names, Add possibility to Edit File Names (1h)
 6. 10.06 - Adjust documentation (+Developer doc), Make a universal artifact (1h)
 7. 11.06 - Try to find bugs, Retrospective, Adjust planning

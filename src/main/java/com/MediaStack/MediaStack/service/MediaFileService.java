@@ -1,6 +1,5 @@
 package com.MediaStack.MediaStack.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,9 +26,9 @@ public class MediaFileService {
 
         isValidMediaFile(mediaFile);
 
-        logger.info("Preparing to save MediaFileModel: name=" + mediaFile.getName() + ", path=" + mediaFile.getPath() + ", type=" + mediaFile.getFileType());
+        logger.info("Preparing to save MediaFileModel: name=" + mediaFile.getName() + ", path=" + mediaFile.getPath() + ", type=" + mediaFile.getType());
 
-        MediaFileModel entityToSave = switch (mediaFile.getFileType()) {
+        MediaFileModel entityToSave = switch (mediaFile.getType()) {
             case MediaFileTypeEnum.IMAGE_JPG -> director.constructImageFileModel(
                     mediaFile.getName(),
                     mediaFile.getPath()
@@ -42,14 +41,14 @@ public class MediaFileService {
                     mediaFile.getName(),
                     mediaFile.getPath()
             );
-            default -> throw new IllegalArgumentException("Unsupported file type: " + mediaFile.getFileType());
+            default -> throw new IllegalArgumentException("Unsupported file type: " + mediaFile.getType());
         };
 
-        logger.info("Constructed entity: name=" + entityToSave.getName() + ", path=" + entityToSave.getPath() + ", type=" + entityToSave.getFileType() + ", id=" + entityToSave.getId());
+        logger.info("Constructed entity: name=" + entityToSave.getName() + ", path=" + entityToSave.getPath() + ", type=" + entityToSave.getType() + ", id=" + entityToSave.getId());
 
         try {
             MediaFileModel saved = mediaFileRepository.save(entityToSave);
-            logger.info("Saved entity: name=" + saved.getName() + ", path=" + saved.getPath() + ", type=" + saved.getFileType() + ", id=" + saved.getId());
+            logger.info("Saved entity: name=" + saved.getName() + ", path=" + saved.getPath() + ", type=" + saved.getType() + ", id=" + saved.getId());
         } catch (Exception e) {
             logger.severe("Error saving MediaFileModel: " + e.getMessage());
             throw e;
@@ -67,7 +66,7 @@ public class MediaFileService {
         logger.info("Repository returned " + (files != null ? files.size() : "null") + " files");
         if (files != null) {
             for (MediaFileModel file : files) {
-                logger.info("Repo File: id=" + file.getId() + ", name=" + file.getName() + ", type=" + file.getFileType());
+                logger.info("Repo File: id=" + file.getId() + ", name=" + file.getName() + ", type=" + file.getType());
             }
         }
         return files;
@@ -87,7 +86,7 @@ public class MediaFileService {
         if (mediaFile.getPath() == null || mediaFile.getPath().isEmpty()) {
             throw new IllegalArgumentException("Path cannot be null or empty");
         }
-        if (mediaFile.getFileType() == null) {
+        if (mediaFile.getType() == null) {
             throw new IllegalArgumentException("File type cannot be null");
         }
     }

@@ -20,10 +20,10 @@ public class Director {
     public MediaFileModel constructVideoFileModel(String name, String path) {
         MediaFileModelBuilder builder = new MediaFileModelBuilder();
 
-        builder.setName(name);
-        builder.setFileType(MediaFileTypeEnum.VIDEO_MP4);
-        builder.setUploadDate(LocalDateTime.now());
-        builder.setPath(path);
+        builder.setMediaFileName(name);
+        builder.setMediaFileType(MediaFileTypeEnum.VIDEO_MP4);
+        builder.setMediaFileUploadDate(LocalDateTime.now());
+        builder.setMediaFilePath(path);
 
         return builder.getResult();
     }
@@ -38,10 +38,10 @@ public class Director {
     public MediaFileModel constructImageFileModel(String name, String path) {
         MediaFileModelBuilder builder = new MediaFileModelBuilder();
 
-        builder.setName(name);
-        builder.setFileType(MediaFileTypeEnum.IMAGE_JPG);
-        builder.setUploadDate(LocalDateTime.now());
-        builder.setPath(path);
+        builder.setMediaFileName(name);
+        builder.setMediaFileType(MediaFileTypeEnum.IMAGE_JPG);
+        builder.setMediaFileUploadDate(LocalDateTime.now());
+        builder.setMediaFilePath(path);
 
         return builder.getResult();
     }
@@ -56,10 +56,10 @@ public class Director {
     public MediaFileModel constructPdfFileModel(String name, String path) {
         MediaFileModelBuilder builder = new MediaFileModelBuilder();
 
-        builder.setName(name);
-        builder.setFileType(MediaFileTypeEnum.PDF);
-        builder.setUploadDate(LocalDateTime.now());
-        builder.setPath(path);
+        builder.setMediaFileName(name);
+        builder.setMediaFileType(MediaFileTypeEnum.PDF);
+        builder.setMediaFileUploadDate(LocalDateTime.now());
+        builder.setMediaFilePath(path);
 
         return builder.getResult();
     }

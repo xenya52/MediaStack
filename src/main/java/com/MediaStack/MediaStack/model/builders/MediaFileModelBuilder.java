@@ -10,13 +10,13 @@ import lombok.Setter;
 
 @Setter
 public class MediaFileModelBuilder {
-    private Long id;
-    private String name;
-    private MediaFileTypeEnum fileType;
-    private LocalDateTime uploadDate;
-    private String path;
+    private Long mediaFileId;
+    private String mediaFileName;
+    private MediaFileTypeEnum mediaFileType;
+    private LocalDateTime mediaFileUploadDate;
+    private String mediaFilePath;
 
     public MediaFileModel getResult() {
-        return new MediaFileModel(id, name, fileType, uploadDate, path);
+        return new MediaFileModel(mediaFileId, mediaFileName, mediaFileType, mediaFileUploadDate, mediaFilePath);
     }
 }
