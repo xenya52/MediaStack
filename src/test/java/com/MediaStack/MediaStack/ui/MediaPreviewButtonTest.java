@@ -1,5 +1,6 @@
 package com.MediaStack.MediaStack.ui;
 
+import com.MediaStack.MediaStack.ui.components.buttons.MediaPreviewButton;
 import com.vaadin.flow.component.html.Image;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

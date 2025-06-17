@@ -25,7 +25,7 @@ public class MediaFileModelBuilderTest {
 
         assert mediaFile.getId().equals(12345L);
         assert mediaFile.getName().equals("Sample Media Video");
-        assert mediaFile.getType().equals(MediaFileTypeEnum.VIDEO_MP4);
+        assert mediaFile.getFileType().equals(MediaFileTypeEnum.VIDEO_MP4);
         assert mediaFile.getUploadDate().equals(uploadDate);
         assert mediaFile.getPath().equals("exampleName/mp4");
     }

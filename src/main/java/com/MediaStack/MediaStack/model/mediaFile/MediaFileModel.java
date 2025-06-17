@@ -27,16 +27,16 @@ public class MediaFileModel {
     @Column(name = "id", columnDefinition = "INTEGER")
     private Long id;
 
-    @Column(name = "fileName", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "fileType", nullable = false, columnDefinition = "TEXT")
-    private MediaFileTypeEnum type;
+    private MediaFileTypeEnum fileType;
 
-    @Column(name = "upload", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "uploadDate", nullable = false, columnDefinition = "TEXT")
     private LocalDateTime uploadDate;
 
-    @Column(name = "saved path", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "path", nullable = false, columnDefinition = "TEXT")
     private String path;
 }

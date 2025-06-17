@@ -1,6 +1,8 @@
-package com.MediaStack.MediaStack.ui;
+package com.MediaStack.MediaStack.ui.components.buttons;
 
 import com.MediaStack.MediaStack.model.mediaFile.MediaFileTypeEnum;
+import com.MediaStack.MediaStack.ui.PdfView;
+import com.MediaStack.MediaStack.ui.VideoPlayer;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.Component;

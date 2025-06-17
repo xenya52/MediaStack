@@ -54,7 +54,7 @@ public class MediaUploadComponent extends VerticalLayout {
                     logger.warn("Unsupported file type: " + mimeType);
                     throw new IllegalArgumentException("Unsupported file type: " + mimeType);
                 }
-                logger.info("Constructed MediaFileModel: name=" + mediaFile.getName() + ", path=" + mediaFile.getPath() + ", type=" + mediaFile.getType());
+                logger.info("Constructed MediaFileModel: name=" + mediaFile.getName() + ", path=" + mediaFile.getPath() + ", type=" + mediaFile.getFileType());
                 mediaService.createMediaFile(mediaFile);
                 logger.info("MediaFileModel persisted to database: " + mediaFile.getName());
                 Notification.show("File uploaded!");

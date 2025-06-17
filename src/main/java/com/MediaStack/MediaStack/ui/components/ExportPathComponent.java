@@ -61,5 +61,6 @@ public class ExportPathComponent extends VerticalLayout {
         buttonColumn.setPadding(false);
         buttonColumn.setSpacing(true);
         buttonColumn.setAlignItems(FlexComponent.Alignment.STRETCH);
+        add(buttonColumn);
     }
 }
