@@ -3,9 +3,7 @@ package com.MediaStack.MediaStack.ui;
 import com.MediaStack.MediaStack.service.MediaFileStorageService;
 import com.MediaStack.MediaStack.ui.components.ExportPathComponent;
 import com.MediaStack.MediaStack.ui.components.MediaUploadComponent;
-import com.MediaStack.MediaStack.ui.components.buttons.MediaPreviewButton;
 import com.MediaStack.MediaStack.ui.components.MediaGridComponent;
-import com.MediaStack.MediaStack.model.mediaFile.MediaFileTypeEnum;
 import com.MediaStack.MediaStack.service.MediaFileService;
 
 import com.vaadin.flow.component.UI;
@@ -45,7 +43,6 @@ public class MainView extends VerticalLayout {
         setupColoringButton();
         setupExportAndUploadRow();
 
-        grid.setupGrid();
         grid.refreshGrid();
     }
 

@@ -21,6 +21,8 @@ import static org.atmosphere.annotation.AnnotationUtil.logger;
 
 public class MediaUploadComponent extends VerticalLayout {
 
+    String uploadDirName = "uploads";
+
     @Autowired
     public MediaUploadComponent(MediaFileService mediaService) {
 
@@ -32,7 +34,7 @@ public class MediaUploadComponent extends VerticalLayout {
 
             logger.info("Upload succeeded: " + event.getFileName() + ", MIME type: " + event.getMIMEType());
             try {
-                Path uploadDir = Paths.get("uploads");
+                Path uploadDir = Paths.get(uploadDirName);
                 if (!Files.exists(uploadDir)) {
                     Files.createDirectories(uploadDir);
                     logger.info("Created upload directory: " + uploadDir.toAbsolutePath());

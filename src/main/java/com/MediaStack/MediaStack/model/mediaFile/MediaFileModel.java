@@ -34,7 +34,7 @@ public class MediaFileModel {
     @Column(name = "fileType", nullable = false, columnDefinition = "TEXT")
     private MediaFileTypeEnum fileType;
 
-    @Column(name = "uploadDate", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "uploadDate", nullable = false)
     private LocalDateTime uploadDate;
 
     @Column(name = "path", nullable = false, columnDefinition = "TEXT")

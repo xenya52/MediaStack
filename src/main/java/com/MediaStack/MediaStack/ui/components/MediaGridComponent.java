@@ -16,32 +16,13 @@ import java.util.logging.Logger;
 public class MediaGridComponent extends VerticalLayout {
 
     private static final Logger logger = Logger.getLogger(MediaGridComponent.class.getName());
-    private final Grid<MediaFileModel> grid = new Grid<>(MediaFileModel.class);
+    private Grid<MediaFileModel> grid = new Grid<>(MediaFileModel.class);
     private final MediaFileService mediaService;
 
     @Autowired
     public MediaGridComponent(MediaFileService mediaService) {
         this.mediaService = mediaService;
-    }
-
-    public void setupGrid() {
-        grid.setColumns("id", "name", "fileType", "uploadDate");
-        grid.addComponentColumn(mediaFile -> {
-            Button delete = new Button("Delete", e -> {
-                mediaService.deleteMediaFileById(mediaFile.getId());
-                refreshGrid();
-            });
-            return delete;
-        }).setHeader("Actions");
-
-        grid.addComponentColumn(mediaFile -> {
-            MediaPreviewButton previewButton = new MediaPreviewButton(
-                    mediaFile.getFileType(),
-                    mediaFile.getPath()
-            );
-            return previewButton.getPreviewButton();
-        }).setHeader("Preview");
-
+        setupGrid();
         add(grid);
     }
 
@@ -58,5 +39,24 @@ public class MediaGridComponent extends VerticalLayout {
         }
         grid.setItems(files);
         logger.info("Grid items set");
+    }
+
+    private void setupGrid() {
+        grid.setColumns("id", "name", "fileType", "uploadDate");
+        grid.addComponentColumn(mediaFile -> {
+            Button delete = new Button("Delete", e -> {
+                mediaService.deleteMediaFileById(mediaFile.getId());
+                refreshGrid();
+            });
+            return delete;
+        }).setHeader("Actions");
+
+        grid.addComponentColumn(mediaFile -> {
+            MediaPreviewButton previewButton = new MediaPreviewButton(
+                    mediaFile.getFileType(),
+                    mediaFile.getPath()
+            );
+            return previewButton.getPreviewButton();
+        }).setHeader("Preview");
     }
 }
